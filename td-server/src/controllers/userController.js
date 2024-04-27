@@ -24,10 +24,10 @@ const login = async (req, res) => {
       startDate: user.startDate,
     });
   } catch (error) {
-    console.error('Server error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 module.exports = {
   login,
 };

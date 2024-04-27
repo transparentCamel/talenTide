@@ -7,11 +7,9 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
-  const [role, setRole] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -31,7 +29,6 @@ export default function LogIn() {
       );
 
       if (response.status === 200) {
-        setRole(response.data.role);
         localStorage.setItem('token', response.data.token);
         navigate('/dashboard');
       }
@@ -75,7 +72,7 @@ export default function LogIn() {
             />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
-              className='absolute top-12 right-6 mt-[6px] cursor-pointer hover:text-pink duration-150'
+              className='absolute top-12 right-6 mt-[6px] cursor-pointer hover:text-blue duration-150'
               onClick={togglePasswordVisibility}
             />
           </span>
