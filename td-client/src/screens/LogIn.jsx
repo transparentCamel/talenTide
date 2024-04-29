@@ -7,11 +7,9 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
-  const [role, setRole] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -31,7 +29,6 @@ export default function LogIn() {
       );
 
       if (response.status === 200) {
-        setRole(response.data.role);
         localStorage.setItem('token', response.data.token);
         navigate('/dashboard');
       }
@@ -53,7 +50,7 @@ export default function LogIn() {
         <h1>Welcome to TalentTide</h1>
 
         <div className='flex flex-col gap-8 mt-8 relative'>
-          {message && <p className={`text-red absolute -top-8`}>{message}</p>}
+          {message && <p className={`text-pink absolute -top-8`}>{message}</p>}
           <span className='flex flex-col gap-2'>
             <label htmlFor='id'>Account ID</label>
             <input
@@ -75,7 +72,7 @@ export default function LogIn() {
             />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
-              className='absolute top-12 right-6 mt-[6px] cursor-pointer hover:text-pink duration-150'
+              className='absolute top-10 right-4 mt-[6px] cursor-pointer hover:text-blue duration-150'
               onClick={togglePasswordVisibility}
             />
           </span>
@@ -90,7 +87,7 @@ export default function LogIn() {
         </div>
         <Link
           to='/'
-          className='text-red hover:opacity-80 self-start duration-150'
+          className='text-pink hover:opacity-80 self-start duration-150'
         >
           Go back to main page
         </Link>

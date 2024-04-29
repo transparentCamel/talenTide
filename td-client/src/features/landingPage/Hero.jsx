@@ -18,7 +18,7 @@ export default function Hero() {
             </p>
             <Link
               to='/login'
-              className='text-red hover:opacity-80 self-start duration-150'
+              className='text-pink hover:opacity-80 self-start duration-150'
             >
               Already ride the same tide? Log In
             </Link>

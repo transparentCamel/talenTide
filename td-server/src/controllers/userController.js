@@ -10,6 +10,7 @@ const login = async (req, res) => {
         role: user.role,
         name: user.name,
         startDate: user.startDate,
+        team: user.team,
       },
       'q98KlO0ppzcE34G7',
       { expiresIn: '1h' }
@@ -22,12 +23,13 @@ const login = async (req, res) => {
       name: user.name,
       surname: user.surname,
       startDate: user.startDate,
+      team: user.team,
     });
   } catch (error) {
-    console.error('Server error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 module.exports = {
   login,
 };

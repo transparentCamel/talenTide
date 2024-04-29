@@ -1,36 +1,26 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
-import { faCodeFork } from '@fortawesome/free-solid-svg-icons';
+import { faCodeFork, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavItem from '../../components/dashboard/NavItem';
 import { useRenderContext } from '../../customHooks/useRenderContext';
-import { jwtDecode } from 'jwt-decode';
+import { useTokenFetch } from '../../customHooks/useTokenFetch';
 
 export default function Nav() {
   const [clickedProfile, setClickedProfile] = useState(false);
   const dropdownRef = useRef(null);
   const { activeRender, handleRenderChange } = useRenderContext();
-
+  const { user } = useTokenFetch();
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem('token');
 
     navigate('/');
   };
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      const decodedToken = jwtDecode(token);
-
-      setUser(decodedToken);
-    }
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -47,7 +37,7 @@ export default function Nav() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [clickedProfile]);
-  console.log(user);
+
   return (
     <nav className='w-1/4 border-e-2 h-screen border-gray-200'>
       <div className='flex flex-row items-center px-8 py-4 relative'>
@@ -112,12 +102,12 @@ export default function Nav() {
             onClick={() => handleRenderChange('analytics')}
             isActive={activeRender === 'analytics'}
           />
-          {user && user.role === 'admin' ? (
+          {user.role === 'admin' ? (
             <NavItem
-              icon={faChartLine}
-              text={'Analytics'}
-              onClick={() => handleRenderChange('analytics')}
-              isActive={activeRender === 'analytics'}
+              icon={faDatabase}
+              text={'Employee Database'}
+              onClick={() => handleRenderChange('db')}
+              isActive={activeRender === 'db'}
             />
           ) : (
             <p>Loading</p>
