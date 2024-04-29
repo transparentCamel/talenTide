@@ -50,7 +50,7 @@ export default function LogIn() {
         <h1>Welcome to TalentTide</h1>
 
         <div className='flex flex-col gap-8 mt-8 relative'>
-          {message && <p className={`text-red absolute -top-8`}>{message}</p>}
+          {message && <p className={`text-pink absolute -top-8`}>{message}</p>}
           <span className='flex flex-col gap-2'>
             <label htmlFor='id'>Account ID</label>
             <input
@@ -72,7 +72,7 @@ export default function LogIn() {
             />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
-              className='absolute top-12 right-6 mt-[6px] cursor-pointer hover:text-blue duration-150'
+              className='absolute top-10 right-4 mt-[6px] cursor-pointer hover:text-blue duration-150'
               onClick={togglePasswordVisibility}
             />
           </span>
@@ -87,7 +87,7 @@ export default function LogIn() {
         </div>
         <Link
           to='/'
-          className='text-red hover:opacity-80 self-start duration-150'
+          className='text-pink hover:opacity-80 self-start duration-150'
         >
           Go back to main page
         </Link>

@@ -5,6 +5,7 @@ import { useTokenFetch } from '../../customHooks/useTokenFetch';
 
 export default function Profile() {
   const [timePassed, setTimePassed] = useState(null);
+  const [formattedStartDate, setFormattedStartDate] = useState('');
   const { user } = useTokenFetch();
   useEffect(() => {
     if (user) {
@@ -23,6 +24,8 @@ export default function Profile() {
       } else {
         setTimePassed(days === 1 ? `${days} day` : `${days} days`);
       }
+      const formattedDate = startDate.toLocaleDateString('lt-LT');
+      setFormattedStartDate(formattedDate);
     }
   }, [user]);
 
@@ -33,7 +36,7 @@ export default function Profile() {
           icon={faCalendarDays}
           h2={`${timePassed} with us! ⚡`}
           p={'Joined since'}
-          h3={user.startDate}
+          h3={formattedStartDate}
         />
         <Card
           icon={faCalendarDays}
