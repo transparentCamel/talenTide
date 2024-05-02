@@ -15,7 +15,11 @@ const verifyToken = (req, res, next) => {
     req.userId = decoded.userId;
     req.userRole = decoded.role;
     req.userName = decoded.name;
+    req.userSurName = decoded.surname;
     req.userStartDate = decoded.startDate;
+    req.email = decoded.email;
+    req.number = decoded.number;
+    req.profileImage = decoded.profileImage;
 
     next();
   });
