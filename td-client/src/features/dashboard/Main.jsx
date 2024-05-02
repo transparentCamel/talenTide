@@ -3,13 +3,14 @@ import { useRenderContext } from '../../customHooks/useRenderContext';
 import Profile from './Profile';
 import { useTokenFetch } from '../../customHooks/useTokenFetch';
 import EmpDb from './EmpDb';
+import AdminWorkspace from './AdminWorkspace';
 export default function Main() {
   const { activeRender } = useRenderContext();
   const { user } = useTokenFetch();
   const renderComponent = () => {
     switch (activeRender) {
       case 'workspace':
-        return <p>{activeRender}</p>;
+        return <AdminWorkspace />;
       case 'inbox':
         return <p>{activeRender}</p>;
       case 'analytics':

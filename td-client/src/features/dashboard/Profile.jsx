@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import Card from '../../components/dashboard/Card';
 import { useTokenFetch } from '../../customHooks/useTokenFetch';
+import AccountDetails from './AccountDetails';
+import Heading from '../../components/dashboard/Heading';
 
 export default function Profile() {
   const [timePassed, setTimePassed] = useState(null);
@@ -30,7 +32,8 @@ export default function Profile() {
   }, [user]);
 
   return (
-    <section className='ml-4 mt-3 pr-16 flex flex-col gap-8'>
+    <section className='ml-4 mt-5 pr-16 flex flex-col gap-8'>
+      <Heading heading={'Account details'} />
       <div className='flex justify-between'>
         <Card
           icon={faCalendarDays}
@@ -51,6 +54,7 @@ export default function Profile() {
           h3={'Date'}
         />
       </div>
+      <AccountDetails />
     </section>
   );
 }

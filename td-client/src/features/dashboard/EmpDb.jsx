@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserForm from './UserForm';
 import {
+  faImage,
   faPenToSquare,
   faTrashCan,
-  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteAuth from './DeleteAuth';
+import Heading from '../../components/dashboard/Heading';
+import SearchInput from '../../components/dashboard/SearchInput';
 
 export default function EmpDb({}) {
   const [users, setUsers] = useState([]);
@@ -19,7 +21,7 @@ export default function EmpDb({}) {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/api/auth/users')
+      .get('http://localhost:3001/users/')
       .then((response) => {
         setUsers(response.data);
       })
@@ -41,7 +43,7 @@ export default function EmpDb({}) {
 
   const handleDeleteUser = (userId) => {
     axios
-      .delete(`http://localhost:3001/api/auth/users/${userId}`)
+      .delete(`http://localhost:3001/users/${userId}`)
       .then((response) => {
         setUsers(users.filter((user) => user._id !== userId));
         setIsDeleteOpen(false);
@@ -65,38 +67,28 @@ export default function EmpDb({}) {
       user.name.toLowerCase().includes(searchInput.toLowerCase()) ||
       user.surname.toLowerCase().includes(searchInput.toLowerCase()) ||
       user.email.toLowerCase().includes(searchInput.toLowerCase()) ||
-      user.team.toLowerCase().includes(searchInput.toLowerCase())
+      user.team.toLowerCase().includes(searchInput.toLowerCase()) ||
+      user.phone.toLowerCase().includes(searchInput.toLowerCase())
   );
 
   return (
     <section className='m-4 p-4 border-2 rounded-xl'>
-      <h2 className='mb-8'>Employee Database</h2>
-      <table className='w-full flex flex-col border-2 rounded-lg'>
+      <Heading heading={'Employee database'} />
+      <table className='w-full flex flex-col border-2 rounded-lg mt-8 shadow-md'>
         <div className='w-full flex items-center border-b-2 p-4'>
           <h3 className='mr-4'>Team members</h3>
           <div className='flex flex-row  gap-1 bg-slate-100 px-4 py-2 rounded-full'>
-            <p>{userCount}</p>
-            <p> {userCount > 1 ? 'users' : 'user'}</p>
+            {filteredUsers ? <p>{filteredUsers.length}</p> : <p>{userCount}</p>}
+            <p>
+              {userCount === 1 || filteredUsers.length === 1 ? 'user' : 'users'}
+            </p>
           </div>
-          <div className='relative ml-8'>
-            <input
-              type='text'
-              className='pr-12'
-              value={searchInput}
-              onChange={handleSearchInputChange}
-              placeholder='Search employees'
-            />
-            {searchInput && (
-              <FontAwesomeIcon
-                icon={faXmark}
-                className='absolute p-2 top-1 mt-0.5 right-2 cursor-pointer hover:text-blue duration-150'
-                onClick={() => {
-                  setSearchInput('');
-                }}
-              />
-            )}
-          </div>
-
+          <SearchInput
+            placeholder='Search employees'
+            onChange={handleSearchInputChange}
+            state={searchInput}
+            setState={() => setSearchInput('')}
+          />
           <button
             className='px-4 py-2 bg-black text-white rounded-lg ml-auto hover:bg-blue duration-150'
             onClick={handleAddUserClick}
@@ -107,10 +99,11 @@ export default function EmpDb({}) {
 
         <thead className='p-4'>
           <tr className='flex'>
-            <th className='w-1/3 text-start'>Name</th>
-            <th className='w-1/3 text-start'>Email</th>
-            <th className='w-1/3 text-start'>Team</th>
-            <th className='text-start mr-1'>Actions</th>
+            <th className='w-1/5 text-start'>Name</th>
+            <th className='w-1/5 text-start'>Team</th>
+            <th className='w-1/5 text-start'>Email</th>
+            <th className='w-1/5 text-start'>Phone</th>
+            <th className='w-1/5 text-start'>Actions</th>
           </tr>
         </thead>
         <tbody className=''>
@@ -121,13 +114,25 @@ export default function EmpDb({}) {
                 index % 2 !== 1 ? 'bg-slate-100' : ''
               }`}
             >
-              <td className='flex items-center gap-2 w-1/3 text-start'>
-                <div className='bg-blue rounded-full w-16 h-16'></div>
+              <td className='flex items-center gap-2 w-1/4 text-start'>
+                {user.profileImage ? (
+                  <img
+                    src={`http://localhost:3001/images/${user.profileImage}`}
+                    alt='Profile'
+                    className='w-16 h-16 rounded-full overflow-hidden object-cover'
+                  />
+                ) : (
+                  <span className='flex rounded-full w-16 h-16 items-center justify-center text-slate-500'>
+                    <FontAwesomeIcon icon={faImage} className='w-6 h-6' />
+                  </span>
+                )}
+
                 {user.name}
               </td>
-              <td className='w-1/3 text-start'>{user.email}</td>
-              <td className='w-1/3 text-start'>{user.team}</td>
-              <div className='ml-auto flex gap-4'>
+              <td className='w-1/4 text-start'>{user.team}</td>
+              <td className='w-1/4 text-start'>{user.email}</td>
+              <td className='w-1/4 text-start'>{user.phone}</td>
+              <td className='w-1/4 flex gap-4'>
                 <FontAwesomeIcon
                   icon={faPenToSquare}
                   className='w-6 h-6 cursor-pointer text-slate-600 hover:text-blue duration-150'
@@ -138,7 +143,7 @@ export default function EmpDb({}) {
                   className='w-6 h-6 cursor-pointer text-slate-600 hover:text-red duration-150'
                   onClick={() => handleDeleteUserClick(user)}
                 />
-              </div>
+              </td>
             </tr>
           ))}
         </tbody>

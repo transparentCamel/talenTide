@@ -8,6 +8,7 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
     surname: '',
     email: '',
     password: '',
+    phone: '',
     birthDate: '',
     startDate: '',
     team: '',
@@ -18,6 +19,7 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
     surname: '',
     email: '',
     password: '',
+    phone: '',
     birthDate: '',
     startDate: '',
     team: '',
@@ -37,6 +39,7 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
         surname: '',
         email: '',
         password: '',
+        phone: '',
         birthDate: '',
         startDate: '',
         team: '',
@@ -66,14 +69,16 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
     let formIsValid = true;
     const newErrors = { ...errors };
 
-    ['name', 'surname', 'email', 'password', 'team'].forEach((field) => {
-      if (!formData[field]) {
-        formIsValid = false;
-        newErrors[field] = `${
-          field.charAt(0).toUpperCase() + field.slice(1)
-        } is required`;
+    ['name', 'surname', 'email', 'password', 'team', 'phone'].forEach(
+      (field) => {
+        if (!formData[field]) {
+          formIsValid = false;
+          newErrors[field] = `${
+            field.charAt(0).toUpperCase() + field.slice(1)
+          } is required`;
+        }
       }
-    });
+    );
     if (!formData.birthDate) {
       formIsValid = false;
       newErrors.birthDate = 'Birth date is required';
@@ -97,12 +102,9 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
     if (formIsValid) {
       try {
         if (user) {
-          await axios.put(
-            `http://localhost:3001/api/auth/users/${user._id}`,
-            formData
-          );
+          await axios.put(`http://localhost:3001/users/${user._id}`, formData);
         } else {
-          await axios.post('http://localhost:3001/api/auth/users', formData);
+          await axios.post('http://localhost:3001/users', formData);
         }
         onClose();
       } catch (error) {
@@ -147,6 +149,15 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
           type={'email'}
           label={'Email'}
           value={formData.email}
+          onChange={handleChange}
+        />
+        <FormInput
+          error={errors.phone}
+          errorStyles={'right-0'}
+          name={'phone'}
+          type={'tel'}
+          label={'Phone'}
+          value={formData.phone}
           onChange={handleChange}
         />
         <FormInput

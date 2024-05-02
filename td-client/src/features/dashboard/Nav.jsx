@@ -4,7 +4,7 @@ import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { faCodeFork, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavItem from '../../components/dashboard/NavItem';
 import { useRenderContext } from '../../customHooks/useRenderContext';
@@ -18,25 +18,15 @@ export default function Nav() {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('profileImage');
 
     navigate('/');
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setClickedProfile(false);
-      }
-    };
-    if (clickedProfile) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [clickedProfile]);
+  const handleRenderChangeWithProfileReset = (renderType) => {
+    setClickedProfile(false);
+    handleRenderChange(renderType);
+  };
 
   return (
     <nav className='w-1/4 border-e-2 h-screen border-gray-200'>
@@ -66,7 +56,7 @@ export default function Nav() {
             <ul className='flex flex-col  text-white'>
               <li
                 className='hover:bg-sky-500 px-4 py-2 rounded-t-lg'
-                onClick={() => handleRenderChange('profile')}
+                onClick={() => handleRenderChangeWithProfileReset('profile')}
               >
                 View Profile
               </li>

@@ -13,9 +13,11 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   surname: { type: String, required: true },
   email: { type: String, required: true },
+  phone: { type: String, required: true },
   birthDate: { type: Date, required: true },
   startDate: { type: Date, required: true },
   team: { type: String, required: true },
+  profileImage: { type: String },
 });
 
 const User = mongoose.model('User', userSchema);
