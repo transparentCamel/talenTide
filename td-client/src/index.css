@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-    input {
-      @apply py-2 px-4 rounded-lg border-2  focus:outline-blue focus:shadow-md ;
+    input,select,textarea {
+      @apply py-2 px-4 rounded-lg border-2  outline-blue focus:shadow-md ;
     }
+    
    body {
     @apply text-black;
    }
@@ -17,6 +18,9 @@
 ::-webkit-scrollbar {
     display: none;
 }
+::-webkit-resizer {
+    display: none;
+  }
 
 @font-face {
     font-family: 'Poppins';
