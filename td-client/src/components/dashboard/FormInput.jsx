@@ -9,6 +9,7 @@ export default function FormInput({
   onChange,
   options,
   errorStyles,
+  optionPlaceholder,
 }) {
   return (
     <div className='flex flex-col relative'>
@@ -26,7 +27,7 @@ export default function FormInput({
           }`}
         >
           <option value='' disabled hidden>
-            Select team
+            {optionPlaceholder}
           </option>
           {options.map((option) => (
             <option key={option.value} value={option.value}>

@@ -178,6 +178,7 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
           value={formData.team}
           onChange={handleChange}
           options={options}
+          optionPlaceholder={'Select team'}
         />
 
         <FormInput
