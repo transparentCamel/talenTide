@@ -11,7 +11,7 @@ app.use('/users', userRoutes);
 app.use(express.static('public'));
 app.use('/api/tasks', taskRoutes);
 mongoose
-  .connect('mongodb://localhost:27017/talenttideDB', {})
+  .connect('mongodb://127.0.0.1:27017/talentide', {})
   .then(() => {
     console.log('Connected to MongoDB');
   })

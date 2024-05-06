@@ -9,10 +9,14 @@ export default function AccountDetails() {
   const [image, setImage] = useState();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/users/${user.userId}/getImage`)
-      .then((res) => setImage(res.data.profileImage))
-      .catch((err) => console.log(err));
+    if (user.profileImage) {
+      axios
+        .get(`http://localhost:3001/api/users/${user.userId}/getImage`)
+        .then((res) => setImage(res.data.profileImage))
+        .catch((err) => console.log(err));
+    } else {
+      setImage(null);
+    }
   }, [user]);
 
   const renderProfileImage = () => {
@@ -20,8 +24,8 @@ export default function AccountDetails() {
       return (
         <img
           src={`http://localhost:3001/images/${image}`}
-          alt='Profile'
-          className='w-32 h-32 rounded-full overflow-hidden object-cover'
+          alt="Profile"
+          className="w-32 h-32 rounded-full overflow-hidden object-cover"
         />
       );
     } else {
@@ -30,16 +34,16 @@ export default function AccountDetails() {
   };
 
   return (
-    <section className='flex flex-col bg-white p-4 rounded-lg border-2'>
-      <div className='flex flex-row gap-8'>
+    <section className="flex flex-col bg-white p-4 rounded-lg border-2">
+      <div className="flex flex-row gap-8">
         <div>{renderProfileImage()}</div>
-        <div className='flex flex-col gap-8'>
-          <span className='flex flex-row gap-2'>
+        <div className="flex flex-col gap-8">
+          <span className="flex flex-row gap-2">
             <h3>{user.name}</h3>
             <h3> {user.surname}</h3>
           </span>
 
-          <div className='flex flex-row gap-16'>
+          <div className="flex flex-row gap-16">
             <EmployeeDetails type={'Team'} text={user.team} />
             <EmployeeDetails type={'Phone number'} text={user.phone} />
             <EmployeeDetails type={'Email'} text={user.email} />

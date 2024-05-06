@@ -116,13 +116,13 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
   };
 
   return (
-    <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50'>
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
       <form
-        className='bg-white p-8 flex flex-col rounded-xl'
+        className="bg-white p-8 flex flex-col rounded-xl"
         onSubmit={handleSubmit}
       >
-        <h2 className='mb-8'>{title}</h2>
-        <div className='flex gap-8'>
+        <h2 className="mb-8">{title}</h2>
+        <div className="flex gap-8">
           <FormInput
             error={errors.name}
             errorStyles={'-top-6'}
@@ -200,15 +200,15 @@ export default function UserForm({ onClose, title, user = null, btnText }) {
           onChange={handleChange}
         />
 
-        <div className='flex gap-4 mt-4'>
+        <div className="flex gap-4 mt-4">
           <button
-            type='submit'
-            className='rounded-lg px-4 py-2 bg-blue text-white hover:bg-sky-500 duration-150'
+            type="submit"
+            className="rounded-lg px-4 py-2 bg-blue text-white hover:bg-sky-500 duration-150"
           >
             {btnText}
           </button>
           <button
-            className='rounded-lg px-4 py-2 bg-slate-100 hover:bg-red hover:text-white duration-150'
+            className="rounded-lg px-4 py-2 bg-slate-100 hover:bg-red hover:text-white duration-150"
             onClick={onClose}
           >
             Cancel
