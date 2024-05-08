@@ -21,42 +21,44 @@ export default function AdminWorkspace() {
       .catch((error) => {
         console.error('Error fetching tasks:', error);
       });
-  }, [tasks]);
+  }, []);
+  const handleSearchInputChange = (e) => {
+    setSearchInput(e.target.value);
+  };
 
   const filteredTasks = tasks.filter(
     (task) =>
       task.title.toLowerCase().includes(searchInput.toLowerCase()) ||
       task.category.toLowerCase().includes(searchInput.toLowerCase()) ||
-      task.dateAssigned.toLowerCase().includes(searchInput.toLowerCase()) ||
-      task.dateDue.toLowerCase().includes(searchInput.toLowerCase())
+      task.priority.toLowerCase().includes(searchInput.toLowerCase()) ||
+      task.status.toLowerCase().includes(searchInput.toLowerCase())
   );
-  const handleSearchInputChange = (e) => {
-    setSearchInput(e.target.value);
-  };
 
   const getStatusRender = (status) => {
     switch (status) {
       case 'completed':
-        return <span className="text-green-500">Completed</span>;
+        return <p className="text-green-500">Completed</p>;
       case 'in_progress':
-        return <span className="text-yellow-500">In Progress</span>;
+        return <p className="text-yellow-500">In Progress</p>;
       case 'pending':
-        return <span className="text-red">Pending</span>;
+        return <p className="text-slate-600">Pending</p>;
+      case 'late':
+        return <p className="text-red">Late</p>;
       default:
-        return <span>{status}</span>;
+        return <p>{status}</p>;
     }
   };
 
   const getPriorityRender = (priority) => {
     switch (priority) {
       case 'low':
-        return <span className="text-green-500">Low</span>;
+        return <p className="text-green-500">Low</p>;
       case 'medium':
-        return <span className="text-yellow-500">Medium</span>;
+        return <p className="text-yellow-500">Medium</p>;
       case 'high':
-        return <span className="text-red">High</span>;
+        return <p className="text-red">High</p>;
       default:
-        return <span>{priority}</span>;
+        return <p>{priority}</p>;
     }
   };
   const handleEditTaskClick = (task) => {

@@ -10,6 +10,8 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use(express.static('public'));
 app.use('/api/tasks', taskRoutes);
+
+
 mongoose
   .connect('mongodb://127.0.0.1:27017/talentide', {})
   .then(() => {
@@ -19,6 +21,7 @@ mongoose
     console.error('MongoDB connection failed:', error.message);
   });
 
+
 app.listen(3001, () => {
-  console.log('server is running');
+  console.log('Server is running');
 });

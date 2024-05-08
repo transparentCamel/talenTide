@@ -11,7 +11,7 @@ export default function AccountDetails() {
   useEffect(() => {
     if (user.profileImage) {
       axios
-        .get(`http://localhost:3001/api/users/${user.userId}/getImage`)
+        .get(`http://localhost:3001/users/${user.userId}/getImage`)
         .then((res) => setImage(res.data.profileImage))
         .catch((err) => console.log(err));
     } else {

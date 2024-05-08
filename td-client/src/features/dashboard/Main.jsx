@@ -5,6 +5,9 @@ import { useTokenFetch } from '../../customHooks/useTokenFetch';
 import EmpDb from './EmpDb';
 import AdminWorkspace from './AdminWorkspace';
 import UserWorkspace from './UserWorkspace';
+import Inbox from './Inbox';
+import UserAnalytics from './UserAnalytics';
+import AdminAnalitycs from './AdminAnalytics';
 export default function Main() {
   const { activeRender } = useRenderContext();
   const { user } = useTokenFetch();
@@ -18,9 +21,14 @@ export default function Main() {
         }
 
       case 'inbox':
-        return <p>{activeRender}</p>;
+        return <Inbox />;
+
       case 'analytics':
-        return <p>{activeRender}</p>;
+        if (user.role === 'admin') {
+          return <AdminAnalitycs />;
+        } else {
+          return <UserAnalytics />;
+        }
       case 'support':
         return <p>{activeRender}</p>;
       case 'profile':

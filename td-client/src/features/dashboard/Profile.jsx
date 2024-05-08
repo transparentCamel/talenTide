@@ -32,26 +32,14 @@ export default function Profile() {
   }, [user]);
 
   return (
-    <section className='ml-4 mt-5 pr-16 flex flex-col gap-8'>
+    <section className="ml-4 mt-5 pr-16 flex flex-col gap-8">
       <Heading heading={'Account details'} />
-      <div className='flex justify-between'>
+      <div className="flex justify-between">
         <Card
           icon={faCalendarDays}
           h2={`${timePassed} with us! ⚡`}
           p={'Joined since'}
           h3={formattedStartDate}
-        />
-        <Card
-          icon={faCalendarDays}
-          h2={'Years Passed'}
-          p={'Years since joined'}
-          h3={'Calculating...'}
-        />
-        <Card
-          icon={faCalendarDays}
-          h2={'Date With us!'}
-          p={'Joined since'}
-          h3={'Date'}
         />
       </div>
       <AccountDetails />

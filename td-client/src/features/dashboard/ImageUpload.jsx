@@ -16,7 +16,7 @@ export function ImageUpload() {
 
     try {
       const response = await axios.post(
-        `http://localhost:3001/api/auth/users/${user.userId}/upload-image`,
+        `http://localhost:3001/users/${user.userId}/upload-image`,
         formData,
         {
           headers: {
@@ -42,20 +42,20 @@ export function ImageUpload() {
 
   return (
     <div
-      className='rounded-full p-4 border-2 flex flex-col items-center justify-center w-32 h-32 gap-2 cursor-pointer hover:text-blue duration-150'
+      className="rounded-full p-4 border-2 flex flex-col items-center justify-center w-32 h-32 gap-2 cursor-pointer hover:text-blue duration-150"
       onClick={() => {
         inputFile.current.click();
       }}
     >
-      <FontAwesomeIcon icon={faImage} className='w-8 h-8' />
-      <p className='text-slate-500 text-xs'>Upload image</p>
+      <FontAwesomeIcon icon={faImage} className="w-8 h-8" />
+      <p className="text-slate-500 text-xs">Upload image</p>
       <input
         ref={inputFile}
-        id='upload-input'
-        type='file'
-        accept='image/*'
+        id="upload-input"
+        type="file"
+        accept="image/*"
         onChange={handleImageUpload}
-        className='hidden'
+        className="hidden"
       />
     </div>
   );

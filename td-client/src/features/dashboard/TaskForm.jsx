@@ -31,7 +31,7 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
       .then((response) => {
         const options = response.data.map((user) => ({
           value: user._id,
-          label: `${user.name} ${user.surname}`,
+          label: `${user.name} ${user.surname}, ${user.team}`,
         }));
         setAssignedToOptions(options);
       })
@@ -49,15 +49,12 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
     { value: 'low', label: 'Low' },
   ];
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleFormSubmit = async () => {
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       const postData = {
         ...formData,
         status: 'pending',
-        dateAssigned: new Date().toISOString(),
       };
 
       try {
