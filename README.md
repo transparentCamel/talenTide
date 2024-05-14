@@ -5,12 +5,20 @@
 Visual Studio Code, MongoDB compass, Node.js
 
 - [Visual Studio Code](https://code.visualstudio.com/download)
-- [Mongo DB](https://www.mongodb.com/docs/compass/current/install/)
+- [Mongo DB shell](https://www.mongodb.com/docs/mongodb-shell/install/)
+- [Mongo DB community Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+- [Mongo DB community MacOs](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
+- [Mongo DB compass](https://www.mongodb.com/docs/compass/current/install/)
 - [Node.js](https://nodejs.org/en/download/current)
+
+## Duomenų bazės paliedimas
+
+Įsijungti mongo DB compass ir spausti connect.
 
 ## Projekto paleidimas
 
-Atsidaryti 2 terminalus per Visual Studio Code.
+- Atsidaryti talenTide aplanką per Visual Studio Code.
+- Atsidaryti 2 terminalus per Visual Studio Code.
 
 ### Serverio modulių įrašymas
 

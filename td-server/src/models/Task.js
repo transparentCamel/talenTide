@@ -15,8 +15,9 @@ const taskSchema = new mongoose.Schema(
       type: String,
       enum: ['low', 'medium', 'high'],
       default: 'medium',
+      
     },
-    category: { type: String },
+    category: { type: String , required: true },
   },
   { timestamps: true }
 );
