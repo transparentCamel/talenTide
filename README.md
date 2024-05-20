@@ -114,3 +114,11 @@ talenTide/td-server/src/server.js
 ```
 
 **Mongoose.connect nuoroda:** 'mongodb://localhost:27017/talentide'
+
+## Kita svarbi informacija:
+
+**Jei kodas trauktas iš GitHub** projekte gali trūkti dviejų folderių: public ir images. Sukurkite public td-server aplanke, o images public aplanke.
+
+```bash
+td-server/public/images
+```
