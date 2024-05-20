@@ -60,12 +60,9 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
 
       try {
         if (task) {
-          await axios.put(
-            `http://localhost:3001/api/tasks/${task._id}`,
-            postData
-          );
+          await axios.put(`http://localhost:3001/tasks/${task._id}`, postData);
         } else {
-          await axios.post('http://localhost:3001/api/tasks', postData);
+          await axios.post('http://localhost:3001/tasks', postData);
         }
         onClose();
         window.location.reload();

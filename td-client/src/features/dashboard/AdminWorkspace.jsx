@@ -15,7 +15,7 @@ export default function AdminWorkspace() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/api/tasks')
+      .get('http://localhost:3001/tasks')
       .then((response) => {
         setTasks(response.data);
       })

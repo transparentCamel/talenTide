@@ -14,7 +14,7 @@ export default function UserAnalytics() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/tasks');
+        const response = await axios.get('http://localhost:3001/tasks');
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);

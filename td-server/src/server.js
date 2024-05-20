@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/users', userRoutes);
 app.use(express.static('public'));
-app.use('/api/tasks', taskRoutes);
+app.use('/tasks', taskRoutes);
 
 mongoose
   .connect('mongodb://127.0.0.1:27017/talentide', {})

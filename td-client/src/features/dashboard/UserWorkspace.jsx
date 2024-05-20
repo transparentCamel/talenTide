@@ -16,7 +16,7 @@ export default function UserWorkspace() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/tasks');
+        const response = await axios.get('http://localhost:3001/tasks');
 
         const userTasks = response.data.filter(
           (task) => task.assignedTo === user.userId
@@ -37,7 +37,7 @@ export default function UserWorkspace() {
       const taskToUpdate = tasks.find((task) => task._id === selectedTask._id);
       if (taskToUpdate && taskToUpdate.status === 'pending') {
         const response = await axios.put(
-          `http://localhost:3001/api/tasks/${selectedTask._id}/userEdit`,
+          `http://localhost:3001/tasks/${selectedTask._id}/userEdit`,
           {
             status: 'in_progress',
           }

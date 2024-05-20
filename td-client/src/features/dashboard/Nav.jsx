@@ -38,7 +38,7 @@ export default function Nav() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/tasks');
+        const response = await axios.get('http://localhost:3001/tasks');
 
         const userTasks = response.data.filter(
           (task) => task.assignedTo === user.userId && task.status === 'pending'
