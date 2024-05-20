@@ -41,9 +41,9 @@ export default function Main() {
   };
 
   return (
-    <main className="bg-gray-50 w-full flex flex-col">
+    <main className='bg-gray-50 w-full flex flex-col'>
       <div>
-        <p className="py-2 px-4 bg-white border-2 rounded-xl w-fit ml-4 mt-4">
+        <p className='py-2 px-4 bg-white border-2 rounded-xl w-fit mx-4 mt-4'>
           Welcome to your dashboard, {user.name}! 👋
         </p>
 

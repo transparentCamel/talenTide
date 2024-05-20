@@ -41,10 +41,10 @@ export default function LogIn() {
   return (
     <main className='h-screen flex items-center justify-center bg-gradient-to-r from-blue to-sky-300'>
       <form
-        className='max-w-1/3 shadow-xl px-12 py-8 flex flex-col rounded-xl gap-4 bg-white'
+        className='max-w-1/3 shadow-xl px-12 py-8 flex flex-col rounded-xl gap-4 bg-white mx-8 max-sm:px-6 max-sm:py-6'
         onSubmit={handleSubmit}
       >
-        <h1>Welcome to TalentTide</h1>
+        <h1>Welcome to Talentide</h1>
 
         <div className='flex flex-col gap-8 mt-8 relative'>
           {message && <p className={`text-pink absolute -top-8`}>{message}</p>}
@@ -69,7 +69,7 @@ export default function LogIn() {
             />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
-              className='absolute top-10 right-4 mt-[6px] cursor-pointer hover:text-blue duration-150'
+              className='absolute top-10 right-4 mt-[6px] cursor-pointer hover:text-blue duration-150 select-none'
               onClick={togglePasswordVisibility}
             />
           </span>
@@ -77,14 +77,14 @@ export default function LogIn() {
             type='submit'
             name='submit'
             id='submit'
-            className='bg-blue text-white py-2 px-6 rounded-full shadow-md cursor-pointer text-xl hover:bg-sky-500 duration-150'
+            className='bg-blue text-white py-2 px-6 rounded-full shadow-md cursor-pointer text-xl hover:bg-sky-500 duration-150 select-none'
           >
             Log In
           </button>
         </div>
         <Link
           to='/'
-          className='text-pink hover:opacity-80 self-start duration-150'
+          className='text-pink hover:opacity-80 self-start duration-150 select-none'
         >
           Go back to main page
         </Link>

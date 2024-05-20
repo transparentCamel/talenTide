@@ -15,20 +15,36 @@
    }
   }
 
-::-webkit-scrollbar {
-    display: none;
-}
-::-webkit-resizer {
+
+  .overflow-x-auto {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer/Edge */
+    overflow: -moz-scrollbars-none; /* Firefox */
+  }
+  
+  
+  .overflow-x-auto::-webkit-scrollbar {
     display: none;
   }
+  
 
+  .overflow-x-auto {
+    overflow-x: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 @font-face {
     font-family: 'Poppins';
     src: url('./assets/fonts/Poppins-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
+body, main{
+    margin:0px;
+    padding: 0px;
+   
 
+}
 html *{
     
     font-family: 'Poppins', sans-serif;
@@ -38,8 +54,8 @@ html *{
 h1,h2,h3 {
    
     font-weight: bold;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
  
 }
 
@@ -74,3 +90,19 @@ li {
     line-height: 1.5;
     cursor: pointer;
 }
+@media only screen and (max-width: 1280px) {
+    h1 {
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    p {
+        font-size: 16px;
+        line-height: 28px;
+    }
+}
+

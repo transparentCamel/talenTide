@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const login = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     const user = req.user;
 
@@ -35,8 +35,4 @@ const login = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
-};
-
-module.exports = {
-  login,
 };

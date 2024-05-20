@@ -24,8 +24,8 @@ export default function AccountDetails() {
       return (
         <img
           src={`http://localhost:3001/images/${image}`}
-          alt="Profile"
-          className="w-32 h-32 rounded-full overflow-hidden object-cover"
+          alt='Profile'
+          className='w-32 h-32 rounded-full overflow-hidden object-cover'
         />
       );
     } else {
@@ -34,16 +34,18 @@ export default function AccountDetails() {
   };
 
   return (
-    <section className="flex flex-col bg-white p-4 rounded-lg border-2">
-      <div className="flex flex-row gap-8">
-        <div>{renderProfileImage()}</div>
-        <div className="flex flex-col gap-8">
-          <span className="flex flex-row gap-2">
+    <section className='flex flex-col bg-white p-4 rounded-lg border-2 max-lg:items-center max-lg:text-center'>
+      <div className='flex flex-row gap-8 max-lg:flex-col'>
+        <div className='flex items-center justify-center'>
+          {renderProfileImage()}
+        </div>
+        <div className='flex flex-col gap-8'>
+          <span className='flex flex-row gap-2 max-lg:justify-center'>
             <h3>{user.name}</h3>
             <h3> {user.surname}</h3>
           </span>
 
-          <div className="flex flex-row gap-16">
+          <div className='flex flex-row gap-16 max-sm:flex-col'>
             <EmployeeDetails type={'Team'} text={user.team} />
             <EmployeeDetails type={'Phone number'} text={user.phone} />
             <EmployeeDetails type={'Email'} text={user.email} />

@@ -9,10 +9,10 @@ export default function NavItem({ icon, text, onClick, isActive, number }) {
       }`}
       onClick={onClick}
     >
-      <FontAwesomeIcon icon={icon} className="w-6 h-6 flex items-center" />
+      <FontAwesomeIcon icon={icon} className='w-6 h-6 flex items-center' />
       <p>{text}</p>
       {number && (
-        <p className="absolute py-1 px-2 text-[10px] rounded-full text-white bg-red right-2">
+        <p className='absolute text-[10px] h-5 px-2  flex justify-center items-center rounded-full text-white bg-red right-2'>
           {number}
         </p>
       )}

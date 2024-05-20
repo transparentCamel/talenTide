@@ -17,7 +17,7 @@ export default function Dashboard() {
   return (
     <RenderProvider>
       <TokenProvider>
-        <div className='flex flex-row'>
+        <div className='flex flex-row max-lg:flex-col'>
           {!isLoading && (
             <>
               <Nav />

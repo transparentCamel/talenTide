@@ -12,6 +12,7 @@ export default function AdminWorkspace() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+
   useEffect(() => {
     axios
       .get('http://localhost:3001/api/tasks')
@@ -22,6 +23,7 @@ export default function AdminWorkspace() {
         console.error('Error fetching tasks:', error);
       });
   }, []);
+
   const handleSearchInputChange = (e) => {
     setSearchInput(e.target.value);
   };
@@ -37,13 +39,13 @@ export default function AdminWorkspace() {
   const getStatusRender = (status) => {
     switch (status) {
       case 'completed':
-        return <p className="text-green-500">Completed</p>;
+        return <p className='text-green-500'>Completed</p>;
       case 'in_progress':
-        return <p className="text-yellow-500">In Progress</p>;
+        return <p className='text-yellow-500'>In Progress</p>;
       case 'pending':
-        return <p className="text-slate-600">Pending</p>;
+        return <p className='text-slate-600'>Pending</p>;
       case 'late':
-        return <p className="text-red">Late</p>;
+        return <p className='text-red'>Late</p>;
       default:
         return <p>{status}</p>;
     }
@@ -52,27 +54,28 @@ export default function AdminWorkspace() {
   const getPriorityRender = (priority) => {
     switch (priority) {
       case 'low':
-        return <p className="text-green-500">Low</p>;
+        return <p className='text-green-500'>Low</p>;
       case 'medium':
-        return <p className="text-yellow-500">Medium</p>;
+        return <p className='text-yellow-500'>Medium</p>;
       case 'high':
-        return <p className="text-red">High</p>;
+        return <p className='text-red'>High</p>;
       default:
         return <p>{priority}</p>;
     }
   };
+
   const handleEditTaskClick = (task) => {
     setSelectedTask(task);
     setIsEditOpen(true);
   };
 
   return (
-    <section className=" border-2 rounded-lg p-4 mt-[18px] mx-4">
+    <section className='border-2 rounded-lg p-4 mt-[18px] mx-4 '>
       <Heading heading={'Task database'} />
-      <table className="w-full flex flex-col border-2 rounded-lg mt-8 shadow-md">
-        <div className="w-full flex items-center border-b-2 p-4">
-          <h3 className="mr-4">Tasks</h3>
-          <div className="flex flex-row  gap-1 bg-slate-100 px-4 py-2 rounded-full">
+      <div className='w-full flex items-center py-4 max-md:flex-col max-md:items-start gap-4'>
+        <div className='flex items-center'>
+          <h3 className='mr-4'>Tasks</h3>
+          <div className='flex flex-row  gap-1 bg-slate-100 px-4 py-2 rounded-full'>
             {filteredTasks ? (
               <p>{filteredTasks.length}</p>
             ) : (
@@ -84,14 +87,18 @@ export default function AdminWorkspace() {
                 : 'tasks'}
             </p>
           </div>
+        </div>
+        <div className='flex w-full max-sm:flex-col gap-4'>
           <SearchInput
-            placeholder="Search tasks"
+            placeholder='Search tasks'
             onChange={handleSearchInputChange}
             state={searchInput}
             setState={() => setSearchInput('')}
+            divClass={'max-sm:w-full'}
+            inputClass={'max-sm:w-full'}
           />
           <button
-            className="px-4 py-2 bg-black text-white rounded-lg ml-auto hover:bg-blue duration-150"
+            className='px-4 py-2 bg-black text-white rounded-lg ml-auto hover:bg-blue duration-150 max-sm:ml-0'
             onClick={() => {
               setIsFormOpen(true);
             }}
@@ -99,47 +106,51 @@ export default function AdminWorkspace() {
             + Add task
           </button>
         </div>
-        <thead className="p-4">
-          <tr className="flex">
-            <th className="w-1/6 text-start">Title</th>
-            <th className="w-1/6 text-start">Category</th>
-            <th className="w-1/6 text-start">Priority</th>
-            <th className="w-1/6 text-start">Date Assigned</th>
-            <th className="w-1/6 text-start">Date Due</th>
-            <th className="w-1/6 text-start">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTasks.map((task, index) => (
-            <tr
-              key={task._id}
-              className={`p-4 flex items-center relative ${
-                index % 2 !== 1 ? 'bg-slate-100' : ''
-              }`}
-            >
-              <td className="w-1/6">{task.title}</td>
-              <td className="w-1/6">{task.category}</td>
-              <td className="w-1/6">{getPriorityRender(task.priority)}</td>
-              <td className="w-1/6">
-                {new Date(task.dateAssigned).toLocaleString('lt-LT', {
-                  dateStyle: 'short',
-                })}
-              </td>
-              <td className="w-1/6">
-                {new Date(task.dateDue).toLocaleString('lt-LT', {
-                  dateStyle: 'short',
-                })}
-              </td>
-              <td className="w-1/6">{getStatusRender(task.status)}</td>
-              <FontAwesomeIcon
-                icon={faPen}
-                className="absolute right-4 cursor-pointer text-slate-600 hover:text-blue duration-150"
-                onClick={() => handleEditTaskClick(task)}
-              />
+      </div>
+      <div className='overflow-x-auto  border-2 rounded-xl'>
+        <table className='w-full  shadow-md'>
+          <thead>
+            <tr>
+              <th className='w-1/6 p-4 text-left'>Title</th>
+              <th className='w-1/6 p-4 text-left'>Category</th>
+              <th className='w-1/6 p-4 text-left'>Priority</th>
+              <th className='w-1/6 p-4 text-left'>Date Assigned</th>
+              <th className='w-1/6 p-4 text-left'>Date Due</th>
+              <th className='w-1/6 p-4 text-left'>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredTasks.map((task, index) => (
+              <tr
+                key={task._id}
+                className={index % 2 === 0 ? 'bg-gray-100' : ''}
+              >
+                <td className='p-4'>{task.title}</td>
+                <td className='p-4'>{task.category}</td>
+                <td className='p-4'>{getPriorityRender(task.priority)}</td>
+                <td className='p-4'>
+                  {new Date(task.createdAt).toLocaleString('lt-LT', {
+                    dateStyle: 'short',
+                  })}
+                </td>
+                <td className='p-4'>
+                  {new Date(task.dateDue).toLocaleString('lt-LT', {
+                    dateStyle: 'short',
+                  })}
+                </td>
+                <td className='p-4'>{getStatusRender(task.status)}</td>
+                <td className='p-4'>
+                  <FontAwesomeIcon
+                    icon={faPen}
+                    className='cursor-pointer text-slate-600 hover:text-blue duration-150'
+                    onClick={() => handleEditTaskClick(task)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {isFormOpen && (
         <TaskForm
           formTitle={'Add Task'}

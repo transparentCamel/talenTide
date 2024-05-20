@@ -4,9 +4,9 @@ import { useRenderContext } from '../../customHooks/useRenderContext';
 export default function InboxCard({ title, date }) {
   const { handleRenderChange } = useRenderContext();
   return (
-    <div className="border-2 rounded-lg shadow-md p-4">
-      <h3 className="mb-2">{title}</h3>
-      <div className="flex">
+    <div className='border-2 rounded-lg shadow-md p-4'>
+      <h3 className='mb-2'>{title}</h3>
+      <div className='flex max-sm:flex-col'>
         <p>
           {new Date(date).toLocaleString('lt-LT', {
             dateStyle: 'short',
@@ -14,7 +14,7 @@ export default function InboxCard({ title, date }) {
         </p>
         <a
           onClick={() => handleRenderChange('workspace')}
-          className="cursor-pointer ml-auto hover:text-blue duration-150"
+          className='cursor-pointer ml-auto hover:text-blue duration-150'
         >
           View tasks
         </a>

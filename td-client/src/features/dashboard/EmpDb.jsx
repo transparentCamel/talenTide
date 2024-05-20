@@ -72,82 +72,87 @@ export default function EmpDb({}) {
   );
 
   return (
-    <section className='m-4 p-4 border-2 rounded-xl'>
+    <section className='border-2 rounded-lg p-4 mt-[18px] mx-4 '>
       <Heading heading={'Employee database'} />
-      <table className='w-full flex flex-col border-2 rounded-lg mt-8 shadow-md'>
-        <div className='w-full flex items-center border-b-2 p-4'>
-          <h3 className='mr-4'>Team members</h3>
+      <div className='w-full flex items-center py-4 max-md:flex-col max-md:items-start gap-4'>
+        <div className='flex items-center'>
+          <h3 className='mr-4 text-nowrap'>Team members</h3>
           <div className='flex flex-row  gap-1 bg-slate-100 px-4 py-2 rounded-full'>
             {filteredUsers ? <p>{filteredUsers.length}</p> : <p>{userCount}</p>}
             <p>
               {userCount === 1 || filteredUsers.length === 1 ? 'user' : 'users'}
             </p>
           </div>
+        </div>
+        <div className='flex w-full max-sm:flex-col gap-4'>
           <SearchInput
             placeholder='Search employees'
             onChange={handleSearchInputChange}
             state={searchInput}
             setState={() => setSearchInput('')}
+            divClass={'max-sm:w-full'}
+            inputClass={'max-sm:w-full'}
           />
           <button
-            className='px-4 py-2 bg-black text-white rounded-lg ml-auto hover:bg-blue duration-150'
+            className='px-4 py-2 bg-black text-white rounded-lg ml-auto hover:bg-blue duration-150 max-sm:ml-0'
             onClick={handleAddUserClick}
           >
             + Add user
           </button>
         </div>
-
-        <thead className='p-4'>
-          <tr className='flex'>
-            <th className='w-1/5 text-start'>Name</th>
-            <th className='w-1/5 text-start'>Team</th>
-            <th className='w-1/5 text-start'>Email</th>
-            <th className='w-1/5 text-start'>Phone</th>
-            <th className='w-1/5 text-start'>Actions</th>
-          </tr>
-        </thead>
-        <tbody className=''>
-          {filteredUsers.map((user, index) => (
-            <tr
-              key={user._id}
-              className={`p-4 flex items-center ${
-                index % 2 !== 1 ? 'bg-slate-100' : ''
-              }`}
-            >
-              <td className='flex items-center gap-2 w-1/4 text-start'>
-                {user.profileImage ? (
-                  <img
-                    src={`http://localhost:3001/images/${user.profileImage}`}
-                    alt='Profile'
-                    className='w-16 h-16 rounded-full overflow-hidden object-cover'
-                  />
-                ) : (
-                  <span className='flex rounded-full w-16 h-16 items-center justify-center text-slate-500'>
-                    <FontAwesomeIcon icon={faImage} className='w-6 h-6' />
-                  </span>
-                )}
-
-                {user.name}
-              </td>
-              <td className='w-1/4 text-start'>{user.team}</td>
-              <td className='w-1/4 text-start'>{user.email}</td>
-              <td className='w-1/4 text-start'>{user.phone}</td>
-              <td className='w-1/4 flex gap-4'>
-                <FontAwesomeIcon
-                  icon={faPenToSquare}
-                  className='w-6 h-6 cursor-pointer text-slate-600 hover:text-blue duration-150'
-                  onClick={() => handleEditUserClick(user)}
-                />
-                <FontAwesomeIcon
-                  icon={faTrashCan}
-                  className='w-6 h-6 cursor-pointer text-slate-600 hover:text-red duration-150'
-                  onClick={() => handleDeleteUserClick(user)}
-                />
-              </td>
+      </div>
+      <div className='overflow-x-auto  border-2 rounded-xl'>
+        <table className='w-full  shadow-md'>
+          <thead>
+            <tr>
+              <th className='w-1/5 p-4 text-left'>Name</th>
+              <th className='w-1/5 p-4 text-left'>Team</th>
+              <th className='w-1/5 p-4 text-left'>Email</th>
+              <th className='w-1/5 p-4 text-left'>Phone</th>
+              <th className='w-1/5 p-4 text-left'>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredUsers.map((user, index) => (
+              <tr
+                key={user._id}
+                className={index % 2 === 0 ? 'bg-gray-100' : ''}
+              >
+                <td className='p-4 flex flex-row items-center'>
+                  {user.profileImage ? (
+                    <img
+                      src={`http://localhost:3001/images/${user.profileImage}`}
+                      alt='Profile'
+                      className='w-16 h-16 rounded-full overflow-hidden object-cover'
+                    />
+                  ) : (
+                    <span className='flex rounded-full w-16 h-16 items-center justify-center text-slate-500'>
+                      <FontAwesomeIcon icon={faImage} className='w-6 h-6' />
+                    </span>
+                  )}
+
+                  {user.name}
+                </td>
+                <td className='p-4'>{user.team}</td>
+                <td className='p-4'>{user.email}</td>
+                <td className='p-4'>{user.phone}</td>
+                <td className='p-4 flex gap-4'>
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    className='w-6 h-6 cursor-pointer text-slate-600 hover:text-blue duration-150'
+                    onClick={() => handleEditUserClick(user)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrashCan}
+                    className='w-6 h-6 cursor-pointer text-slate-600 hover:text-red duration-150'
+                    onClick={() => handleDeleteUserClick(user)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {isFormOpen && (
         <UserForm
           title={'Add new employee'}

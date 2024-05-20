@@ -25,14 +25,14 @@ export default function Inbox() {
     fetchTasks();
   }, [user.id]);
   return (
-    <section className="border-2 rounded-lg p-4 mt-[18px] mx-4 bg-white">
+    <section className='border-2 rounded-lg p-4 mt-[18px] mx-4 bg-white'>
       <Heading heading={'Inbox'} />
-      <div className="mt-8">
-        <p className="text-slate-600 mb-4">
+      <div className='mt-8'>
+        <p className='text-slate-600 mb-4'>
           You have {pendingTasks.length} new{' '}
           {pendingTasks.length === 1 ? 'message' : 'messages'}
         </p>
-        <ul className="flex flex-col gap-8">
+        <ul className='flex flex-col gap-8'>
           {pendingTasks.map((task) => (
             <InboxCard
               title={'New pending task'}

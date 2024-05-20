@@ -66,9 +66,9 @@ export default function UserAnalytics() {
   const conversionRateWeekly =
     tasks.length === 0 ? 0 : completedTasksThisWeek.length / tasks.length;
   return (
-    <section className="mt-1 p-4">
+    <section className='mt-1 p-4'>
       <Heading heading={'Analytics'} />
-      <div className="flex flex-row mt-8 gap-8">
+      <div className='flex flex-row mt-8 gap-8 max-md:flex-col'>
         <Card
           icon={faChartSimple}
           h2={`Tasks Completed: ${allCompletedTasks.length} ⚡`}

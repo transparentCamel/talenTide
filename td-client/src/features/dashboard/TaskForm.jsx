@@ -49,7 +49,8 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
     { value: 'low', label: 'Low' },
   ];
 
-  const handleFormSubmit = async () => {
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       const postData = {
@@ -67,6 +68,7 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
           await axios.post('http://localhost:3001/api/tasks', postData);
         }
         onClose();
+        window.location.reload();
       } catch (error) {
         console.error('Error:', error);
       }
@@ -116,12 +118,12 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
     }
   }, [task]);
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+    <div className='fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50'>
       <form
-        className="bg-white p-8 flex flex-col rounded-xl w-1/2"
+        className='bg-white p-8 flex flex-col rounded-xl w-1/2 max-lg:w-full max-lg:mx-16 max-sm:mx-4 '
         onSubmit={handleFormSubmit}
       >
-        <h2 className="mb-8">{formTitle}</h2>
+        <h2 className='mb-8'>{formTitle}</h2>
         <FormInput
           error={errors.title}
           errorStyles={'right-0'}
@@ -131,16 +133,16 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
           value={formData.title}
           onChange={handleInputChange}
         />
-        <div className="relative">
-          <label htmlFor="description">Description</label>
+        <div className='relative'>
+          <label htmlFor='description'>Description</label>
           <span className={`text-red absolute right-0`}>
             {errors.description}
           </span>
         </div>
 
         <textarea
-          type="text"
-          name="description"
+          type='text'
+          name='description'
           className={`min-h-32 max-h-64 mb-4 ${
             errors.description ? 'border-red' : ''
           }`}
@@ -185,15 +187,15 @@ export default function TaskForm({ formTitle, btnText, task = null, onClose }) {
           options={priorityOptions}
           optionPlaceholder={'Choose priority'}
         />
-        <div className="flex gap-4 mt-4">
+        <div className='flex gap-4 mt-4'>
           <button
-            type="submit"
-            className="rounded-lg px-4 py-2 bg-blue text-white hover:bg-sky-500 duration-150"
+            type='submit'
+            className='rounded-lg px-4 py-2 bg-blue text-white hover:bg-sky-500 duration-150'
           >
             {btnText}
           </button>
           <button
-            className="rounded-lg px-4 py-2 bg-slate-100 hover:bg-red hover:text-white duration-150"
+            className='rounded-lg px-4 py-2 bg-slate-100 hover:bg-red hover:text-white duration-150'
             onClick={onClose}
           >
             Cancel

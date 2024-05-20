@@ -7,12 +7,14 @@ export default function SearchInput({
   state,
   setState,
   onChange,
+  divClass,
+  inputClass,
 }) {
   return (
-    <div className='relative ml-8'>
+    <div className={`relative ${divClass}`}>
       <input
         type='text'
-        className='pr-12'
+        className={`pr-12 ${inputClass}`}
         value={state}
         onChange={onChange}
         placeholder={placeholder}

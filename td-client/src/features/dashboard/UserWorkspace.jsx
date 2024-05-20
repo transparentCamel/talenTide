@@ -81,8 +81,8 @@ export default function UserWorkspace() {
   );
 
   return (
-    <section className="border-2 rounded-lg p-4 mt-[18px] mx-4 bg-white">
-      <div className="flex">
+    <section className='border-2 rounded-lg p-4 mt-[18px] mx-4 bg-white'>
+      <div className='flex gap-4 max-sm:flex-col'>
         <Heading heading={'Your tasks'} />
         <SearchInput
           placeholder={'Search tasks'}
@@ -91,10 +91,12 @@ export default function UserWorkspace() {
             setSearchInput('');
           }}
           onChange={handleSearchInputChange}
+          divClass={'max-sm:w-full'}
+          inputClass={'max-sm:w-full'}
         />
       </div>
-      <div className="mt-8">
-        <ul className="flex flex-col gap-8">
+      <div className='mt-8'>
+        <ul className='flex flex-col gap-8'>
           {filteredTasks.map((task) => (
             <UserTaskCard
               title={task.title}
