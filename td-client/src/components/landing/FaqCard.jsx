@@ -6,7 +6,7 @@ export default function FaqCard({ title, text }) {
   const [isopenned, setOpenned] = useState(false);
   return (
     <div
-      className='pb-4 px-2 border-b-2 border-black flex items-center cursor-pointer select-none'
+      className='pb-4 px-2 border-b-2 border-black flex items-start cursor-pointer select-none '
       onClick={() => {
         setOpenned(!isopenned);
       }}
@@ -15,7 +15,7 @@ export default function FaqCard({ title, text }) {
         <h3 className='font-semibold mb-4'>{title}</h3>
         <p className={`text-slate-600 ${isopenned ? '' : 'hidden'}`}>{text}</p>
       </span>
-      <span className='ml-auto h-full'>
+      <span className='ml-auto'>
         <FontAwesomeIcon
           icon={isopenned ? faMinus : faPlus}
           className=' h-6 '

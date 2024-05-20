@@ -15,7 +15,11 @@ export default function UserAnalytics() {
     const fetchTasks = async () => {
       try {
         const response = await axios.get('http://localhost:3001/tasks');
-        setTasks(response.data);
+
+        const userTasks = response.data.filter(
+          (task) => task.assignedTo === user.userId
+        );
+        setTasks(userTasks);
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
@@ -65,6 +69,7 @@ export default function UserAnalytics() {
     tasks.length === 0 ? 0 : allCompletedTasks.length / tasks.length;
   const conversionRateWeekly =
     tasks.length === 0 ? 0 : completedTasksThisWeek.length / tasks.length;
+
   return (
     <section className='mt-1 p-4'>
       <Heading heading={'Analytics'} />

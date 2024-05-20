@@ -5,7 +5,7 @@ export default function Faq() {
   return (
     <section
       id='faq'
-      className='py-16 px-8 2xl:py-32 2xl:px-64 xl:px-32 lg:px-16 flex flex-col items-center h-[1024px] xl:h-screen'
+      className='py-16 px-8 2xl:py-32 2xl:px-64 xl:px-32 lg:px-16 flex flex-col items-center min-h-[1024px] xl:h-screen'
     >
       <h1 className='mb-4 text-center'>Frequently asked questions</h1>
       <h2 className='text-slate-400 text-2xl font-normal text-center'>
@@ -25,8 +25,22 @@ export default function Faq() {
           }
         />
         <FaqCard
-          title={'Why my profile image is not showing after upload?'}
-          text={'As of now profile image loads only after user relog.'}
+          title={'Lorem ipsum dolor sit'}
+          text={
+            'Amet consectetur adipisicing elit. Cupiditate quo illo dicta repellat! Ratione commodi quaerat dicta. Repellendus animi, obcaecati enim earum veniam fuga nihil quae dolorem soluta asperiores odio.'
+          }
+        />
+        <FaqCard
+          title={'Lorem ipsum dolor sit'}
+          text={
+            'Amet consectetur adipisicing elit. Cupiditate quo illo dicta repellat! Ratione commodi quaerat dicta. Repellendus animi, obcaecati enim earum veniam fuga nihil quae dolorem soluta asperiores odio.'
+          }
+        />
+        <FaqCard
+          title={'Lorem ipsum dolor sit'}
+          text={
+            'Amet consectetur adipisicing elit. Cupiditate quo illo dicta repellat! Ratione commodi quaerat dicta. Repellendus animi, obcaecati enim earum veniam fuga nihil quae dolorem soluta asperiores odio.'
+          }
         />
       </div>
     </section>

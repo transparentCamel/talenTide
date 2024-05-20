@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 
 const TokenFetch = createContext();
 export const useTokenFetch = () => useContext(TokenFetch);
+
 export const TokenProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userDataUpdated, setUserDataUpdated] = useState(false);
@@ -12,11 +13,6 @@ export const TokenProvider = ({ children }) => {
     if (token) {
       const decodedToken = jwtDecode(token);
       setUser(decodedToken);
-
-      const profileImage = localStorage.getItem('profileImage');
-      if (profileImage) {
-        setUser((prevUser) => ({ ...prevUser, profileImage }));
-      }
     }
   }, [userDataUpdated]);
 

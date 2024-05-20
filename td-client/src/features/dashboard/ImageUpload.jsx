@@ -7,6 +7,7 @@ import { useTokenFetch } from '../../customHooks/useTokenFetch';
 export function ImageUpload() {
   const { user, updateUserProfileImage } = useTokenFetch();
   const inputFile = useRef(null);
+
   const handleImageUpload = async (event) => {
     const selectedImage = event.target.files[0];
     if (!selectedImage) return;
@@ -27,35 +28,54 @@ export function ImageUpload() {
       );
 
       if (response.status === 200) {
-        updateUserProfileImage(response.data.profileImage);
+        await fetchUserProfileImage(user.userId);
       }
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
 
-  useEffect(() => {
-    if (user.profileImage) {
-      updateUserProfileImage(user.profileImage);
+  const fetchUserProfileImage = async (userId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/users/${userId}/getImage`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        updateUserProfileImage(response.data.profileImage);
+      }
+    } catch (error) {
+      console.error('Error fetching profile image:', error);
     }
-  }, [user.profileImage, updateUserProfileImage]);
+  };
+
+  useEffect(() => {
+    if (!user.profileImage) {
+      fetchUserProfileImage(user.userId);
+    }
+  }, [user]);
 
   return (
     <div
-      className="rounded-full p-4 border-2 flex flex-col items-center justify-center w-32 h-32 gap-2 cursor-pointer hover:text-blue duration-150"
+      className='rounded-full p-4 border-2 flex flex-col items-center justify-center w-32 h-32 gap-2 cursor-pointer hover:text-blue duration-150'
       onClick={() => {
         inputFile.current.click();
       }}
     >
-      <FontAwesomeIcon icon={faImage} className="w-8 h-8" />
-      <p className="text-slate-500 text-xs">Upload image</p>
+      <FontAwesomeIcon icon={faImage} className='w-8 h-8' />
+      <p className='text-slate-500 text-xs'>Upload image</p>
       <input
         ref={inputFile}
-        id="upload-input"
-        type="file"
-        accept="image/*"
+        id='upload-input'
+        type='file'
+        accept='image/*'
         onChange={handleImageUpload}
-        className="hidden"
+        className='hidden'
       />
     </div>
   );
