@@ -3,20 +3,16 @@ import Card from '../../components/dashboard/Card';
 import { faChartSimple } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Heading from '../../components/dashboard/Heading';
-import { useTokenFetch } from '../../customHooks/useTokenFetch';
 
 export default function AdminAnalytics() {
-  const { user } = useTokenFetch();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const response = await axios.get('http://localhost:3001/tasks');
-        const userTasks = response.data.filter(
-          (task) => task.assignedTo === user.userId
-        );
-        setTasks(userTasks);
+
+        setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
